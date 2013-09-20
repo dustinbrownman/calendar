@@ -6,6 +6,8 @@ class Event < ActiveRecord::Base
   validates :start_timestamp, presence: true
   validates :end_timestamp, presence: true
 
+  has_many :notes, as: :notable
+
   def self.upcoming 
     order('start_timestamp').where("start_timestamp > ?", (Time.now - 7.hour))
   end
