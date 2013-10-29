@@ -6,11 +6,13 @@ require './lib/todo'
 ActiveRecord::Base.establish_connection(YAML::load(File.open('./db/config.yml'))['development'])
 
 def welcome
+  puts `clear`
   puts "Event Manager 5000"
   main
 end
 
 def main
+  print `clear`
   input = nil
   until input == 'x'
     puts "\n[C]reate new event, [V]iew events, [N]ew todo, [L]ist todos, E[x]it\n"
@@ -34,6 +36,7 @@ def main
 end
 
 def create_event
+  print `clear`
   puts "\nCreate an Event\n\n"
   print "Enter a description: "
   description = gets.chomp
@@ -65,7 +68,7 @@ def view_menu
   when 'b'
     view_between
   when 'm'
-    main_menu
+    main
   else
     puts "I'm sorry, that is not a valid option."
     view_menu
@@ -77,8 +80,7 @@ def print_events(events)
     puts "#{index + 1}. #{event.description}"
     puts "   Where: #{event.location}" if event.location
     puts "   Start: #{event.start_timestamp.strftime('%^a, %^b %e, %Y @ %l:%M%P')}" if event.start_timestamp
-    puts "     End: #{event.end_timestamp.strftime('%^a, %^b %e, %Y @ %l:%M%P')}" if event.end_timestamp
-    puts "   Notes: #{event.notes}\n\n"
+    puts "     End: #{event.end_timestamp.strftime('%^a, %^b %e, %Y @ %l:%M%P')}\n\n" if event.end_timestamp
   end
   select_event(events)
 end
@@ -193,7 +195,7 @@ def todo_menu(todos)
   elsif input.downcase == 'm'
     main
   else
-    puts "Are you dumb, or just plain stupid?"
+    puts "Sorry, that doesn't work."
   end
 end
 

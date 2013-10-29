@@ -19,5 +19,4 @@ class Event < ActiveRecord::Base
   def self.between(start_date, end_date)
     order('start_timestamp').where(start_timestamp: (Time.parse(start_date) - 7.hour)..(Time.parse(end_date) + 1.day - 7.hour))
   end
-
 end
