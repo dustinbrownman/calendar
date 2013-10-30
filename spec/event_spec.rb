@@ -1,12 +1,9 @@
-   require 'spec_helper'
+require 'spec_helper'
 
 describe Event do
   it { should validate_presence_of :description }
-
   it { should validate_presence_of :start_timestamp }
-
   it { should validate_presence_of :end_timestamp }
-
   it { should have_many :notes }
 
   describe '.upcoming' do
